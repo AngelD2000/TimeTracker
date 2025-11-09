@@ -62,4 +62,9 @@ public class TransactionService {
     public void deleteAllTransactions(){
         transactionRepository.deleteAll();
     }
+
+    @Transactional
+    public Long updateTransaction(Transaction transaction) {
+        return transactionRepository.update(transaction);
+    }
 }

@@ -14,4 +14,5 @@ public interface TransactionRepository {
     TransactionEntity findById(Long id);
     void deleteById(Long id);
     void deleteAll();
+    Long update(Transaction transaction);
 }

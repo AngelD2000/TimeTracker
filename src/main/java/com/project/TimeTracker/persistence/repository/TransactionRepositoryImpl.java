@@ -25,7 +25,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     @Override
     public Long save(Transaction transaction) {
         //use mapper to change transaction to transactionEntity
-        TransactionEntity transactionEntity = transactionMapper.toEntity(transaction);
+        TransactionEntity transactionEntity = transactionMapper.toEntity(transaction, null);
         entityManager.persist(transactionEntity);
         return transactionEntity.getId();
     }
@@ -49,5 +49,14 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     @Override
     public void deleteAll() {
         entityManager.createQuery("DELETE FROM TransactionEntity").executeUpdate();
+    }
+
+    @Override
+    public Long update(Transaction transaction) {
+        TransactionEntity oldEntity = entityManager.find(TransactionEntity.class, transaction.getId());
+        Transaction oldTransaction = transactionMapper.fromEntity(oldEntity);
+        TransactionEntity transactionEntity = transactionMapper.toEntity(transaction, oldTransaction);
+        entityManager.merge(transactionEntity);
+        return transactionEntity.getId();
     }
 }
