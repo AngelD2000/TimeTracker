@@ -52,11 +52,11 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     }
 
     @Override
-    public Long update(Transaction transaction) {
-        TransactionEntity oldEntity = entityManager.find(TransactionEntity.class, transaction.getId());
+    public TransactionEntity update(Long id, Transaction transaction) {
+        TransactionEntity oldEntity = entityManager.find(TransactionEntity.class, id);
         Transaction oldTransaction = transactionMapper.fromEntity(oldEntity);
         TransactionEntity transactionEntity = transactionMapper.toEntity(transaction, oldTransaction);
         entityManager.merge(transactionEntity);
-        return transactionEntity.getId();
+        return transactionEntity;
     }
 }

@@ -11,16 +11,20 @@ import java.time.Instant;
 public class TransactionMapper {
 
     public TransactionEntity toEntity(Transaction transaction, Transaction oldTransaction) {
-        String dateString = transaction.getDate();
-        Instant date;
-        if(StringUtil.isNullOrEmpty(dateString) && !StringUtil.isNullOrEmpty(oldTransaction.getDate())) {
-            date = Instant.parse(oldTransaction.getDate());
+        Instant date = dateFromString(transaction, oldTransaction);
+        if(oldTransaction == null){
+            return TransactionEntity.builder()
+                    .id(transaction.getId())
+                    .category(transaction.getCategory())
+                    .date(date)
+                    .amountAllocated(transaction.getAmountAllocated())
+                    .amountSpent(transaction.getAmountSpent())
+                    .description(transaction.getDescription())
+                    .build();
         }
-        else {
-            date = Instant.parse(dateString);
-        }
+        else{
 
-        return TransactionEntity.builder()
+            return TransactionEntity.builder()
                 .id(transaction.getId() != null ? transaction.getId() : oldTransaction.getId())
                 .category(transaction.getCategory() != null ? transaction.getCategory() : oldTransaction.getCategory())
                 .date(date)
@@ -28,6 +32,7 @@ public class TransactionMapper {
                 .amountSpent(transaction.getAmountSpent() !=  null ? transaction.getAmountSpent() : oldTransaction.getAmountSpent())
                 .description(transaction.getDescription() != null ? transaction.getDescription() : oldTransaction.getDescription())
                 .build();
+        }
     }
 
     public Transaction fromEntity(TransactionEntity transactionEntity) {
@@ -41,6 +46,20 @@ public class TransactionMapper {
                 .description(transactionEntity.getDescription())
                 .category(transactionEntity.getCategory())
                 .build();
+    }
+
+    private Instant dateFromString(Transaction transaction, Transaction oldTransaction) {
+        String dateString = (transaction != null && transaction.getDate() != null) ? transaction.getDate() : null;
+        String oldDateString = (oldTransaction != null && oldTransaction.getDate() != null) ? oldTransaction.getDate() : null;
+        if(StringUtil.isNullOrEmpty(dateString) && oldDateString != null){
+            return Instant.parse(oldDateString);
+        }
+        else if(dateString != null){
+            return Instant.parse(dateString);
+        }
+        else{
+            return Instant.now();
+        }
     }
 
 }

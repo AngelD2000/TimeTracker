@@ -5,6 +5,8 @@ import com.project.TimeTracker.service.TransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +25,7 @@ public class TransactionsDataFetcher {
     }
 
     @GetMapping("/get/{id}")
+    @Cacheable(value = "transaction", key="#id")
     public Transaction get(@PathVariable("id") long id) {
         logger.info("getting transaction with id: {}", id);
         return transactionService.getTransactionById(id);
@@ -41,20 +44,23 @@ public class TransactionsDataFetcher {
     }
 
     @DeleteMapping("/delete/{id}")
+    @CacheEvict(value = "transaction", key="#id")
     public void delete(@PathVariable("id") long id) {
         logger.info("deleting transaction with id: {}", id);
         transactionService.deleteTransactionById(id);
     }
 
     @DeleteMapping("/delete/all")
+    @CacheEvict(value = "transaction", allEntries = true)
     public void deleteAll() {
         logger.info("deleting all transactions");
         transactionService.deleteAllTransactions();
     }
 
-    @PostMapping("update")
-    public Long update(@RequestBody Transaction transaction) {
+    @PostMapping("update/{id}")
+    @CacheEvict(value = "transaction", key="#id")
+    public Transaction update(@PathVariable("id") long id, @RequestBody Transaction transaction) {
         logger.info("updating transaction: {}", transaction);
-        return transactionService.updateTransaction(transaction);
+        return transactionService.updateTransaction(id, transaction);
     }
 }

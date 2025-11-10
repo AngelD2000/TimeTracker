@@ -64,7 +64,8 @@ public class TransactionService {
     }
 
     @Transactional
-    public Long updateTransaction(Transaction transaction) {
-        return transactionRepository.update(transaction);
+    public Transaction updateTransaction(Long id, Transaction transaction) {
+        TransactionEntity updatedEntity =  transactionRepository.update(id, transaction);
+        return transactionMapper.fromEntity(updatedEntity);
     }
 }
