@@ -23,8 +23,8 @@ public class BudgetCategoryEntity {
     @JoinColumn(name="fk_budgetWeekId", referencedColumnName = "id")
     private BudgetWeekEntity budgetWeek;
 
-//    @OneToMany(mappedBy = "budgetCategory")
-//    private List<TransactionEntity> transactions;
+    @OneToMany(mappedBy = "budgetCategory")
+    private List<TransactionEntity> transactions;
 
     String description;
     Double plannedTimeAllocation;

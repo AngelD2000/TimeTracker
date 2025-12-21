@@ -14,6 +14,6 @@ public class CategoryEntity {
     private Long id;
     String name;
 
-//    @OneToOne (mappedBy = "category")
-//    private BudgetCategoryEntity budgetCategory;
+    @OneToOne (mappedBy = "category")
+    private BudgetCategoryEntity budgetCategory;
 }

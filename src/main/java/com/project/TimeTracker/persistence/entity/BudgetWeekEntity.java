@@ -19,6 +19,6 @@ public class BudgetWeekEntity {
     private Instant startDate;
     private Instant endDate;
 
-//    @OneToMany(mappedBy="budgetWeek")
-//    private List<BudgetCategoryEntity> budgetCategoryEntities;
+    @OneToMany(mappedBy="budgetWeek")
+    private List<BudgetCategoryEntity> budgetCategoryEntities;
 }
