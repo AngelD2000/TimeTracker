@@ -11,9 +11,8 @@ import java.time.Instant;
 @Builder
 public class Transaction {
     public Long id;
-    public String date;
-    public String category;
-    public Double amountSpent;
-    public Double amountAllocated;
+    public Long budgetCategoryId;
+    public Instant date;
+    public Double timeSpent;
     public String description;
 }

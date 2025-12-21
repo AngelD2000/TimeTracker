@@ -1,26 +1,25 @@
 package com.project.TimeTracker.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.Instant;
 
 @Entity
-@Table(name="transactions")
-@Data
-@Builder
+@Table(name="Transaction")
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class TransactionEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="fk_budgetCategoryId", referencedColumnName = "id")
+    private BudgetCategoryEntity budgetCategory;
+
     private Instant date;
-    private String category;
-    private Double amountSpent;
-    private Double amountAllocated;
+    private Double timeSpent;
     private String description;
 }

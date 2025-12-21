@@ -1,9 +1,9 @@
 package com.project.TimeTracker.persistence.repository;
 
-import com.project.TimeTracker.persistence.entity.TransactionEntity;
+import com.project.TimeTracker.persistence.entity.CategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TransactionRepository extends JpaRepository<TransactionEntity,Long> {
+public interface CategoryRepository  extends JpaRepository<CategoryEntity,Long> {
 }
