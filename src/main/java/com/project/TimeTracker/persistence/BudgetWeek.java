@@ -11,6 +11,6 @@ import java.time.Instant;
 @Getter
 public class BudgetWeek {
     public Long id;
-    public Instant startDate;
-    public Instant endDate;
+    public String startDate;
+    public String endDate;
 }

@@ -12,7 +12,7 @@ import java.time.Instant;
 public class Transaction {
     public Long id;
     public Long budgetCategoryId;
-    public Instant date;
+    public String date;
     public Double timeSpent;
     public String description;
 }
