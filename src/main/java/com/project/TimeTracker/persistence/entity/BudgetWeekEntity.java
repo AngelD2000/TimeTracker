@@ -7,7 +7,10 @@ import java.time.Instant;
 import java.util.List;
 
 @Entity
-@Table(name = "BudgetWeek")
+@Table(name = "BudgetWeek",
+uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"start_date", "end_date"})
+})
 @NoArgsConstructor
 @Setter
 @Getter
