@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@layer components {
+    .add-transaction-button {
+        @apply fixed bottom-6 right-8 bg-blue-500 w-12 h-12 rounded-full text-white flex justify-center items-center hover:bg-blue-600 active:bg-blue-700;
+    }
+}
