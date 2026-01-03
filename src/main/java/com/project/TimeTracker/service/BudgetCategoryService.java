@@ -7,6 +7,10 @@ import com.project.TimeTracker.persistence.repository.BudgetCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,6 +54,11 @@ public class BudgetCategoryService {
         updatedEntity.setId(id);
         BudgetCategoryEntity savedEntity = budgetCategoryRepository.save(updatedEntity);
         return budgetCategoryMapper.entityToBudgetCategory(savedEntity);
+    }
+
+    public List<BudgetCategory> getBudgetCategoriesByWeek(String weekStart){
+        List<BudgetCategoryEntity> entities = budgetCategoryRepository.findAllBudgetCategoriesByWeek(weekStart);
+        return entities.stream().map(budgetCategoryMapper::entityToBudgetCategory).collect(Collectors.toList());
     }
 
 

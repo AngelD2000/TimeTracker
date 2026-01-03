@@ -34,12 +34,6 @@ public class BudgetCategoryDataFetcher {
         return budgetCategoryService.getById(id);
     }
 
-    @GetMapping("/getAll")
-    public List<BudgetCategory> getAllBudgetCategories() {
-        logger.info("getting all budget categories");
-        return budgetCategoryService.getAll();
-    }
-
     @DeleteMapping("/delete/{id}")
     public void deleteBudgetCategory(@PathVariable("id") Long id) {
         logger.info("deleting budget category with id: {}", id);
@@ -52,11 +46,11 @@ public class BudgetCategoryDataFetcher {
         return budgetCategoryService.update(id, budgetCategory);
     }
 
-//    @GetMapping("/budgets/{weekStart}")
-//    public List<BudgetCategory> budgetCategoryByWeekStart(@PathVariable("weekStart") String weekStart) {
-//        logger.info("getting budget category by week: {}", weekStart);
-//        return budgetCategoryService.getBudgetCategoryByWeek(weekStart);
-//
-//    }
+    @GetMapping("/budgets/{weekStart}")
+    public List<BudgetCategory> budgetCategoryByWeekStart(@PathVariable("weekStart") String weekStart) {
+        logger.info("getting budget category by week: {}", weekStart);
+        return budgetCategoryService.getBudgetCategoriesByWeek(weekStart);
+
+    }
 
 }
