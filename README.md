@@ -60,4 +60,9 @@ Name VARCHAR(100),
 Description VARCHAR(255)
 );
 
+## Finished
+- CRUD operations for each of the entities 
+- Front end with mocked data
 
+## Need to do next 
+- Working JPQL queries that can power apis to power the frontend
