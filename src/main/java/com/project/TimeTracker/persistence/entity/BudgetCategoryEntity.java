@@ -15,7 +15,7 @@ public class BudgetCategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="fk_categoryId", referencedColumnName="id")
     private CategoryEntity category;
 

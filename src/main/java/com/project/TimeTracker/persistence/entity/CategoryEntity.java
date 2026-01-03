@@ -3,6 +3,8 @@ package com.project.TimeTracker.persistence.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="Category")
 @NoArgsConstructor
@@ -14,6 +16,6 @@ public class CategoryEntity {
     private Long id;
     String name;
 
-    @OneToOne (mappedBy = "category")
-    private BudgetCategoryEntity budgetCategory;
+    @OneToMany(mappedBy = "category")
+    private List<BudgetCategoryEntity> budgetCategoryEntityList;
 }

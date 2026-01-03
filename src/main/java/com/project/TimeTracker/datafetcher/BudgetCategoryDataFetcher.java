@@ -52,4 +52,11 @@ public class BudgetCategoryDataFetcher {
         return budgetCategoryService.update(id, budgetCategory);
     }
 
+//    @GetMapping("/budgets/{weekStart}")
+//    public List<BudgetCategory> budgetCategoryByWeekStart(@PathVariable("weekStart") String weekStart) {
+//        logger.info("getting budget category by week: {}", weekStart);
+//        return budgetCategoryService.getBudgetCategoryByWeek(weekStart);
+//
+//    }
+
 }

@@ -51,4 +51,6 @@ public class BudgetCategoryService {
         BudgetCategoryEntity savedEntity = budgetCategoryRepository.save(updatedEntity);
         return budgetCategoryMapper.entityToBudgetCategory(savedEntity);
     }
+
+
 }
